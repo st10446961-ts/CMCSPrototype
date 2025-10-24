@@ -1,0 +1,53 @@
+﻿@model CMCSPrototype.Models.Claim
+@{
+    ViewData["Title"] = "Submit Claim";
+}
+
+<h2>Submit Claim</h2>
+
+<form asp-action="Submit" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="LecturerName"></label>
+        <input asp-for="LecturerName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClaimMonth"></label>
+        <input asp-for="ClaimMonth" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HoursWorked"></label>
+        <input asp-for="HoursWorked" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HourlyRate"></label>
+        <input asp-for="HourlyRate" class="form-control" />
+    </div>
+
+    <!-- File upload section -->
+    <div class="form-group">
+        <label asp-for="UploadedFile"></label>
+        <input asp-for="UploadedFile" type="file" class="form-control" id="fileInput"
+               accept=".pdf,.doc,.docx,.zip" />
+        <small id="fileName" class="form-text text-muted">No file selected.</small>
+        <small class="form-text text-muted">Allowed file types: PDF, DOC, DOCX, ZIP</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Script to show selected file name -->
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+
+    fileInput.addEventListener('change', () => {
+        if(fileInput.files.length > 0) {
+            fileName.textContent = "Selected file: " + fileInput.files[0].name;
+        } else {
+            fileName.textContent = "No file selected.";
+        }
+    });
+</script>

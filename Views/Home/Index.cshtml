@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard">
+    <h2>Welcome to the Contract Monthly Claim System (CMCS)</h2>
+    <p class="muted">This is the prototype dashboard. Choose your role below to explore the claim workflow.</p>
+
+    <!-- Quick role actions -->
+    <div class="dashboard-roles">
+        <div class="card">
+            <h3>Lecturer</h3>
+            <p>Submit your monthly claims quickly and attach required documents.</p>
+            <a class="btn" asp-controller="Claims" asp-action="Submit">Submit Claim</a>
+            <a class="btn btn-secondary" asp-controller="Claims" asp-action="Track">Track Status</a>
+        </div>
+
+        <div class="card">
+            <h3>Programme Coordinator</h3>
+            <p>Review lecturer claims and verify accuracy before manager approval.</p>
+            <a class="btn" asp-controller="Claims" asp-action="Verify">Verify Claims</a>
+        </div>
+
+        <div class="card">
+            <h3>Academic Manager</h3>
+            <p>Approve verified claims to finalize the process.</p>
+            <a class="btn" asp-controller="Claims" asp-action="Verify">Approve Claims</a>
+        </div>
+    </div>
+
+    <!-- Claim statistics (prototype sample) -->
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <h4>Pending Claims</h4>
+            <p>5</p>
+        </div>
+        <div class="stat-card">
+            <h4>Approved Claims</h4>
+            <p>12</p>
+        </div>
+        <div class="stat-card">
+            <h4>Rejected Claims</h4>
+            <p>1</p>
+        </div>
+    </div>
+</div>

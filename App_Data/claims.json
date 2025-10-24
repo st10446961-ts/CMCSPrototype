@@ -1,0 +1,13 @@
+[
+    {
+        "Id": 1,
+        "LecturerName": "Dr. T. Mokoena",
+        "ClaimMonth": "September 2025",
+        "HoursWorked": 25,
+        "HourlyRate": 500,
+        "Status": "Pending",
+        "SupportingDocument": "/uploads/sample.pdf",
+        "SubmittedAt": "2025-09-30T10:00:00Z",
+        "SubmittedBy": "t.mokoena"
+    }
+]

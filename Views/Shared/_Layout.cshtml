@@ -1,0 +1,86 @@
+﻿@{
+    var title = ViewData["Title"] as string ?? "CMCS Prototype";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title - CMCS Prototype</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a asp-controller="Home" asp-action="Index" class="nav-brand">
+                <img src="~/lib/cartoon_5497315.png" alt="CMCS Logo" class="logo" />
+                <span>CMCS Prototype</span>
+            </a>
+
+
+
+            <div class="nav-links">
+                <a asp-controller="Home" asp-action="Index"
+                   class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">
+                    Dashboard
+                </a>
+                <a asp-controller="Claims" asp-action="Submit"
+                   class="@(ViewContext.RouteData.Values["Action"].ToString() == "Submit" ? "active" : "")">
+                    Submit Claim
+                </a>
+                <a asp-controller="Claims" asp-action="Verify"
+                   class="@(ViewContext.RouteData.Values["Action"].ToString() == "Verify" ? "active" : "")">
+                    Verify Claims
+                </a>
+                <a asp-controller="Claims" asp-action="Track"
+                   class="@(ViewContext.RouteData.Values["Action"].ToString() == "Track" ? "active" : "")">
+                    Track Claims
+                </a>
+                <a asp-controller="Account" asp-action="Login"
+                   class="@(ViewContext.RouteData.Values["Action"].ToString() == "Login" ? "active" : "")">
+                    Login
+                </a>
+                <a asp-controller="Account" asp-action="Register"
+                   class="@(ViewContext.RouteData.Values["Action"].ToString() == "Register" ? "active" : "")">
+                    Register
+                </a>
+            </div>
+
+
+
+        </nav>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            @if (TempData["PrototypeMessage"] != null)
+            {
+                <div class="alert alert-info">@TempData["PrototypeMessage"]</div>
+            }
+            <h1 class="page-title">@title</h1>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">&copy; 2025 - CMCS Prototype - Academic Claims Management System</div>
+    </footer>
+
+    <script>
+        // Prevent real postbacks on prototype forms when they carry data-prototype="true"
+        document.addEventListener('submit', function (e) {
+            var form = e.target;
+            if (form.matches('form[data-prototype="true"]')) {
+                e.preventDefault();
+                const toast = document.createElement('div');
+                toast.className = 'alert alert-info';
+                toast.textContent = form.getAttribute('data-msg') || 'Prototype only: action simulated.';
+                form.prepend(toast);
+                setTimeout(() => toast.remove(), 3500);
+            }
+        }, true);
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

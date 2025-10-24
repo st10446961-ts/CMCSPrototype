@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Register (Prototype)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Create Account</h2>
+<p class="muted">Prototype only. Selecting a role demonstrates intended UX.</p>
+<form data-prototype="true" data-msg="Prototype: user would be registered here.">
+    <div class="form-group">
+        <label>Username</label>
+        <input required />
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" required />
+    </div>
+    <div class="form-group">
+        <label>Role</label>
+        <select required>
+            <option value="">-- Select Role --</option>
+            <option>Lecturer</option>
+            <option>Programme Coordinator</option>
+            <option>Academic Manager</option>
+        </select>
+    </div>
+    <button class="btn">Register</button>
+</form>

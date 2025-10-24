@@ -1,0 +1,75 @@
+﻿@model List<CMCSPrototype.Models.Claim>
+@{
+    ViewData["Title"] = "Verify Claims";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Verify and Approve Claims</h2>
+<p class="muted">Prototype: Approve/Reject will update the in-memory status.</p>
+
+@if (TempData["PrototypeMessage"] != null)
+{
+    <div class="alert alert-info">@TempData["PrototypeMessage"]</div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Lecturer</th>
+            <th>Month</th>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Status</th>
+            <th>Document</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.Id</td>
+                <td>@claim.LecturerName</td>
+                <td>@claim.ClaimMonth</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>
+                    @if (claim.Status == "Pending")
+                    {
+                        <span class="status-pending">@claim.Status</span>
+                    }
+                    else if (claim.Status == "Approved")
+                    {
+                        <span class="status-approved">@claim.Status</span>
+                    }
+                    else
+                    {
+                        <span class="status-rejected">@claim.Status</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(claim.SupportingDocument))
+                    {
+                        <a asp-action="Download" asp-route-id="@claim.Id" class="btn btn-link">Download</a>
+                    }
+                    else
+                    {
+                        <span>No file</span>
+                    }
+                </td>
+                <td>
+                    <form asp-action="Approve" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@claim.Id" />
+                        <button class="btn" type="submit">Approve</button>
+                    </form>
+
+                    <form asp-action="Reject" method="post" style="display:inline; margin-left:5px;">
+                        <input type="hidden" name="id" value="@claim.Id" />
+                        <button class="btn btn-secondary" type="submit">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
